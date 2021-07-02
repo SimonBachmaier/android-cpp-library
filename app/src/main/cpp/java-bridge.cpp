@@ -12,17 +12,23 @@ bool checkExc(JNIEnv *env) {
     return false;
 }
 
+extern "C" JNIEXPORT jint JNICALL
+Java_com_quanos_nativeinterfacesapplication_NativeFunctions_AddOne(
+        JNIEnv *env, jobject thiz, jint x) {
+    return cpl::AddOne(x);
+}
+
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_quanos_nativeinterfacesapplication_NativeFunctions_stringFromJNI(
-        JNIEnv *env, jobject thiz, jstring arg1) {
-    if (arg1 == NULL) {
+Java_com_quanos_nativeinterfacesapplication_NativeFunctions_HelloMessage(
+        JNIEnv *env, jobject thiz, jstring from) {
+    if (from == NULL) {
         jclass exception = env->FindClass("java/lang/IllegalArgumentException");
         env->ThrowNew(exception, "Passed argument is null."); // Error Message
         return NULL;
     }
 
     jboolean isCopy;
-    std::string cppArg1 = env->GetStringUTFChars(arg1, &isCopy);
+    std::string cppArg1 = env->GetStringUTFChars(from, &isCopy);
 
     /**
      * Use library BEGIN

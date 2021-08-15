@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         t2 = new Date().getTime();
         long javaTime = t2 - t1;
 
-        long timeDiff = cppTime - javaTime;
-        tv.setText("C++ test took " + cppTime + "ms. Java test took " + javaTime + "ms. C++ was " + timeDiff + "ms " + (timeDiff > 0 ? "slower." : "faster."));
+        tv.setText("C++ test took " + cppTime + "ms. Java test took " + javaTime + "ms.");
 
         /**
          * Connect to database and read data
